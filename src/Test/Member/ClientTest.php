@@ -18,13 +18,13 @@ class ClientTest extends TestCase
         $result = $app->apply([
 
             // 真实姓名
-            'user_name' => '陈德龙',
+            'user_name' => '',
 
             // 证件类型。暂仅支持 IDENTITY_CARD （身份证）。
             'cert_type' => 'IDENTITY_CARD',
 
             // 证件号
-            'cert_no' => '441701199206010019',
+            'cert_no' => '',
         ]);
 
         print_r($result);
