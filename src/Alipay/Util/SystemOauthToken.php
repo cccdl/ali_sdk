@@ -1,34 +1,31 @@
 <?php
+namespace cccdl\ali_sdk\Alipay\Util;
 
-
-namespace cccdl\ali_sdk\Ali;
-
+use cccdl\ali_sdk\Alipay\BasicAliPay;
 use cccdl\ali_sdk\Exceptions\InvalidResponseException;
 use cccdl\ali_sdk\Exceptions\LocalCacheException;
 
 /**
- * 支付宝电子面单下载
- * Class Bill
+ * 换取授权访问令牌
+ * Class App
  * @package AliPay
  */
-class Bill extends BasicAliPay
+class SystemOauthToken extends BasicAliPay
 {
     /**
-     * Bill constructor.
+     * App constructor.
      * @param array $options
      */
     public function __construct(array $options)
     {
         parent::__construct($options);
-        $this->options->set('method', 'alipay.data.dataservice.bill.downloadurl.query');
+        $this->options->set('method', 'alipay.system.oauth.token');
     }
 
+
     /**
-     * 创建数据操作
-     * @param array $options
-     * @return array|bool
-     * @throws InvalidResponseException
      * @throws LocalCacheException
+     * @throws InvalidResponseException
      */
     public function apply(array $options)
     {

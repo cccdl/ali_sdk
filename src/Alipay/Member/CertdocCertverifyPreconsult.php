@@ -1,34 +1,31 @@
 <?php
+namespace cccdl\ali_sdk\Alipay\Member;
 
-
-namespace cccdl\ali_sdk\Ali;
-
+use cccdl\ali_sdk\Alipay\BasicAliPay;
 use cccdl\ali_sdk\Exceptions\InvalidResponseException;
 use cccdl\ali_sdk\Exceptions\LocalCacheException;
+
 /**
- * 支付宝刷卡支付
- * Class Pos
+ * 实名证件信息比对验证预咨询
+ * Class App
  * @package AliPay
  */
-class Pos extends BasicAliPay
+class CertdocCertverifyPreconsult extends BasicAliPay
 {
     /**
-     * Pos constructor.
+     * App constructor.
      * @param array $options
      */
     public function __construct(array $options)
     {
         parent::__construct($options);
-        $this->options->set('method', 'alipay.trade.pay');
-        $this->params->set('product_code', 'FACE_TO_FACE_PAYMENT');
+        $this->options->set('method', 'alipay.user.certdoc.certverify.preconsult');
     }
 
+
     /**
-     * 创建数据操作
-     * @param array $options
-     * @return array|bool
-     * @throws InvalidResponseException
      * @throws LocalCacheException
+     * @throws InvalidResponseException
      */
     public function apply(array $options)
     {

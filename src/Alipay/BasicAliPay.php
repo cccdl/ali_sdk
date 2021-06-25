@@ -1,7 +1,7 @@
 <?php
 
 
-namespace cccdl\ali_sdk\Ali;
+namespace cccdl\ali_sdk\Alipay;
 
 use cccdl\ali_sdk\Exceptions\InvalidArgumentException;
 use cccdl\ali_sdk\Exceptions\InvalidResponseException;
