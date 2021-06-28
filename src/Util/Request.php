@@ -21,7 +21,7 @@ trait Request
      * @throws GuzzleException
      * @throws cccdlException
      */
-    private function post()
+    protected function post()
     {
         $client = new Client([
             'timeout' => 10,
