@@ -42,9 +42,11 @@ class ClientTest extends TestCase
         $this->assertIsArray($c);
         $app = new CertdocCertverifyConsult($c);
         $result = $app->apply([
-            // 真实姓名
-            'verify_id' => '1cd83ecaa92ed38f31a10d821cf742b0',
-            'auth_token' => 'idvrifyBfba865efd3d545af997d41bd39340X38'
+            //验证id
+            'verify_id' => '',
+
+            //授权后回调的auth_token
+            'auth_token' => ''
         ]);
 
         print_r($result);
