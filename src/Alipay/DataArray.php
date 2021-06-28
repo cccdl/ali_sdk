@@ -1,7 +1,7 @@
 <?php
 
 
-namespace cccdl\ali_sdk\Util;
+namespace cccdl\ali_sdk\AliPay;
 
 use ArrayAccess;
 

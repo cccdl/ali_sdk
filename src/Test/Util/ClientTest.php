@@ -3,7 +3,6 @@
 namespace cccdl\ali_sdk\Test\Util;
 
 use cccdl\ali_sdk\Alipay\Util\SystemOauthToken;
-use cccdl\ali_sdk\Exceptions\InvalidResponseException;
 use cccdl\ali_sdk\Test\TestAccount;
 use PHPUnit\Framework\TestCase;
 
@@ -16,19 +15,24 @@ class ClientTest extends TestCase
         $c = TestAccount::getTestAccount();
         $this->assertIsArray($c);
         $app = new SystemOauthToken($c);
-        try{
-            $result = $app->apply([
-                // 授权方式。支持：1.authorization_code，表示换取使用用户授权码code换取授权令牌access_token。 2.refresh_token，表示使用refresh_token刷新获取新授权令牌。
-//                'grant_type' => 'authorization_code',
-                // 授权码，用户对应用授权后得到。本参数在 grant_type 为 authorization_code 时必填；为 refresh_token 时不填。
-                'code' => '99b3516d341442c187e87209f196YD79',
-            ]);
-        } catch (InvalidResponseException $e) {
-           print_r($e->raw);
+        $result = $app->apply([
+            // 授权方式。支持：1.authorization_code，表示换取使用用户授权码code换取授权令牌access_token。 2.refresh_token，表示使用refresh_token刷新获取新授权令牌。
+            'grant_type' => 'authorization_code',
+            // 授权码，用户对应用授权后得到。本参数在 grant_type 为 authorization_code 时必填；为 refresh_token 时不填。
+            'code' => '2986ef7c9e6b4c48ae91ac555254OX38',
+        ]);
 
-            $this->assertSame('10000', $e->raw['error_response']['code']);
-            $this->assertSame('Success', $e->raw['error_response']['msg']);
-        }
+        print_r($result);
+        $this->assertIsArray($result);
+        $this->assertArrayHasKey('access_token', $result);
+        $this->assertArrayHasKey('alipay_user_id', $result);
+        $this->assertArrayHasKey('expires_in', $result);
+        $this->assertArrayHasKey('re_expires_in', $result);
+        $this->assertArrayHasKey('refresh_token', $result);
+        $this->assertArrayHasKey('user_id', $result);
+//        $this->assertArrayHasKey('msg', $result);
+
 
     }
+
 }

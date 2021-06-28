@@ -14,7 +14,14 @@
     "ali_sdk"
   ],
   "require": {
-    "php": ">=7.1"
+    "php": ">=7.1",
+    "ext-json": "*",
+    "ext-curl": "*",
+    "ext-openssl": "*",
+    "ext-xml": "*",
+    "ext-libxml": "*",
+    "ext-simplexml": "*",
+    "guzzlehttp/guzzle": "^7.3"
   },
   "require-dev": {
     "phpunit/phpunit": "^9.5"
