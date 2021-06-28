@@ -10,6 +10,7 @@
 ### 更新日志
 
 - 1.0.0 增加 “换取授权访问令牌”、“换取授权访问令牌”，优化了请求调用方式
+- 1.1.0 增加 “名证件信息比对验证咨询”
 
 ## 安装
 
@@ -24,7 +25,9 @@ $ composer require cccdl/ali_sdk
 | 文件               |  说明      |
 | ------------------|------------|
 | Alipay\Member\CertdocCertverifyPreconsult.php  | 实名证件信息比对验证预咨询 |
+| Alipay\Member\CertdocCertverifyConsult.php  | 实名证件信息比对验证咨询 |
 | Alipay\Util\SystemOauthToken.php  | 换取授权访问令牌 |
+
 
 ### 快速使用
 
