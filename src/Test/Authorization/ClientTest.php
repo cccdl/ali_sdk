@@ -1,0 +1,28 @@
+<?php declare(strict_types=1);
+
+namespace cccdl\ali_sdk\Test\Member;
+
+use cccdl\ali_sdk\Alipay\Authorization\Authorization;
+use cccdl\ali_sdk\Test\TestAccount;
+use PHPUnit\Framework\TestCase;
+
+require '../../../vendor/autoload.php';
+
+class ClientTest extends TestCase
+{
+    public function testA(): void
+    {
+        $c = TestAccount::getTestAccount();
+        $this->assertIsArray($c);
+        $app = new Authorization($c);
+        $result = $app->apply([
+            'scope' => 'id_verify' //id_verify=支付宝实名信息验证功能场景 kuaijie=支付宝登录场景
+        ]);
+
+        var_dump($result);
+        $this->assertIsString($result);
+
+    }
+
+
+}

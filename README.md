@@ -10,7 +10,8 @@
 ### 更新日志
 
 - 1.0.0 增加 “换取授权访问令牌”、“换取授权访问令牌”，优化了请求调用方式
-- 1.1.0 增加 “名证件信息比对验证咨询”
+- 1.1.0 增加 “实名证件信息比对验证咨询”
+- 1.2.0 增加 “获取移动app端使用的授权参数infoStr”
 
 ## 安装
 
@@ -27,6 +28,7 @@ $ composer require cccdl/ali_sdk
 | Alipay\Member\CertdocCertverifyPreconsult.php  | 实名证件信息比对验证预咨询 |
 | Alipay\Member\CertdocCertverifyConsult.php  | 实名证件信息比对验证咨询 |
 | Alipay\Util\SystemOauthToken.php  | 换取授权访问令牌 |
+| Alipay\Authorization\Authorization.php  | 获取移动app端使用的授权参数infoStr |
 
 
 ### 快速使用
@@ -46,13 +48,15 @@ $config = [
     'private_key' => '请填写您的应用私钥',
     //回调地址
     'notify_url' => '请填写您的回调地址',
+     //获取地址 https://openhome.alipay.com/platform/keyManage.htm?keyType=partner 合作伙伴身份pid
+    'pid' => '请填写您的回调地址',
 ];
 $app = new SystemOauthToken($config);
 $result = $app->apply([
     // 授权方式。支持：1.authorization_code，表示换取使用用户授权码code换取授权令牌access_token。 2.refresh_token，表示使用refresh_token刷新获取新授权令牌。
     'grant_type' => 'authorization_code',
     // 授权码，用户对应用授权后得到。本参数在 grant_type 为 authorization_code 时必填；为 refresh_token 时不填。
-    'code' => '2986ef7c9e6b4c48ae91ac555254OX38',
+    'code' => '',
 ]);
 ```
 

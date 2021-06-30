@@ -22,6 +22,9 @@ class TestAccount
             //回调地址
 //            'notify_url' => '请填写您的回调地址',
             'notify_url' => '',
+
+            //获取地址 https://openhome.alipay.com/platform/keyManage.htm?keyType=partner 合作伙伴身份pid
+            'pid' => '',
         ];
     }
 

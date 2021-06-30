@@ -51,8 +51,12 @@ class ClientTest extends TestCase
 
         print_r($result);
         $this->assertIsArray($result);
-        $this->assertSame('10000',$result['code']);
-        $this->assertSame('Success',$result['msg']);
+        $this->assertSame('10000', $result['code']);
+        $this->assertSame('Success', $result['msg']);
         $this->assertArrayHasKey('passed', $result);
     }
+
+
+
+
 }
