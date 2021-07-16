@@ -37,6 +37,6 @@ class CertdocCertverifyPreconsult extends BasicAliPay
     {
         $this->options->set('biz_content', json_encode($this->params->merge($options), 256));
         $this->options->set('sign', $this->getSign());
-        return $this->getPostBody();
+        return $this->postBody();
     }
 }

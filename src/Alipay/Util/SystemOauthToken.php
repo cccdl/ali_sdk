@@ -38,7 +38,7 @@ class SystemOauthToken extends BasicAliPay
         $this->options->set('grant_type', $options['grant_type']);
         $this->options->set('code', $options['code']);
         $this->options->set('sign', $this->getSign());
-        return $this->getPostBody();
+        return $this->postBody();
     }
 
 
@@ -48,7 +48,7 @@ class SystemOauthToken extends BasicAliPay
      * @throws GuzzleException
      * @throws cccdlException
      */
-    protected function getPostBody()
+    protected function postBody()
     {
         $data = $this->post();
         if (isset($data['error_response']['code']) && $data['error_response']['code'] !== '10000') {

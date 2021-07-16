@@ -162,15 +162,16 @@ abstract class BasicAliPay
     }
 
     /**
-     *  请求并获取接过
+     *  post请求并获取結果
      * @return mixed
      * @throws InvalidResponseException
      * @throws GuzzleException
      * @throws cccdlException
      */
-    protected function getPostBody()
+    protected function postBody()
     {
         $data = $this->post();
+
         if (!isset($data[$this->method]['code']) || $data[$this->method]['code'] !== '10000') {
             throw new InvalidResponseException(
                 "Error: " .

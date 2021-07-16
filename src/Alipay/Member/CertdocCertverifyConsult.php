@@ -6,7 +6,6 @@ use cccdl\ali_sdk\Alipay\BasicAliPay;
 use cccdl\ali_sdk\Exceptions\cccdlException;
 use cccdl\ali_sdk\Exceptions\InvalidResponseException;
 use GuzzleHttp\Exception\GuzzleException;
-
 /**
  * 实名证件信息比对验证咨询【非预咨询接口】
  * Class App
@@ -38,6 +37,6 @@ class CertdocCertverifyConsult extends BasicAliPay
         $this->options->set('biz_content', json_encode($this->params->merge($options), 256));
         $this->options->set('auth_token', $options['auth_token']);
         $this->options->set('sign', $this->getSign());
-        return $this->getPostBody();
+        return $this->postBody();
     }
 }
