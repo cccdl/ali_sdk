@@ -13,7 +13,6 @@ use cccdl\ali_sdk\Exceptions\InvalidResponseException;
  */
 class CertdocCertverifyPreconsult extends BasicAliPay
 {
-    private string $method;
 
     /**
      * App constructor.
@@ -32,21 +31,12 @@ class CertdocCertverifyPreconsult extends BasicAliPay
      * @return mixed
      * @throws InvalidResponseException
      * @throws cccdlException
+     * @throws \GuzzleHttp\Exception\GuzzleException
      */
     public function apply(array $options)
     {
         $this->options->set('biz_content', json_encode($this->params->merge($options), 256));
         $this->options->set('sign', $this->getSign());
-        $data = $this->post();
-
-        if (!isset($data[$this->method]['code']) || $data[$this->method]['code'] !== '10000') {
-            throw new InvalidResponseException(
-                "Error: " .
-                (empty($data[$this->method]['code']) ? '' : "{$data[$this->method]['msg']} [{$data[$this->method]['code']}]\r\n") .
-                (empty($data[$this->method]['sub_code']) ? '' : "{$data[$this->method]['sub_msg']} [{$data[$this->method]['sub_code']}]\r\n"),
-                $data[$this->method]['code'], $data
-            );
-        }
-        return $data[$this->method];
+        return $this->getPostBody();
     }
 }
