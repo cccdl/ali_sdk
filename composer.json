@@ -1,6 +1,7 @@
 {
   "name": "cccdl/ali_sdk",
   "homepage": "https://github.com/cccdl/ali_sdk",
+  "description": "支付宝 sdk for php",
   "type": "library",
   "license": "MIT",
   "authors": [
