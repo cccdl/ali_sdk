@@ -9,9 +9,10 @@
 
 ### 更新日志
 
-- 1.0.0 增加 “换取授权访问令牌”、“换取授权访问令牌”，优化了请求调用方式
-- 1.1.0 增加 “实名证件信息比对验证咨询”
-- 1.2.0 增加 “获取移动app端使用的授权参数infoStr”
+- 1.0.0 增加 【换取授权访问令牌】、【换取授权访问令牌】，请求库改为 guzzlehttp/guzzle 7.3版本
+- 1.1.0 增加 【实名证件信息比对验证咨询】
+- 1.2.0 增加 【获取移动app端使用的授权参数infoStr】
+- 1.2.1 优化 【获取app授权验证码infoStr】 apply请求方法、优化 【换取授权访问令牌】apply请求方法
 
 ## 安装
 
@@ -33,7 +34,7 @@ $ composer require cccdl/ali_sdk
 
 ### 快速使用
 
-在您开始之前，您需要注册网易云信并获取您的[凭证](https://opendocs.alipay.com/apis/api_9/alipay.system.oauth.token)。
+在您开始之前，您需要注册支付宝并获取您的[凭证](https://opendocs.alipay.com/apis/api_9/alipay.system.oauth.token)。
 
 ```php
 <?php
