@@ -12,7 +12,9 @@
   ],
   "keywords": [
     "cccdl",
-    "ali_sdk"
+    "ali_sdk",
+    "支付宝",
+    "支付宝实名验证"
   ],
   "require": {
     "php": ">=7.1",
