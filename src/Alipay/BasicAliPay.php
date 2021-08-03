@@ -120,11 +120,11 @@ abstract class BasicAliPay
         $content = wordwrap($this->config->get('public_key'), 64, "\n", true);
         $res = "-----BEGIN PUBLIC KEY-----\n$content\n-----END PUBLIC KEY-----";
         if ($this->options->get('sign_type') === 'RSA2') {
-            if (openssl_verify(json_encode($data, 256), base64_decode($sign), $res, OPENSSL_ALGO_SHA256) !== 1) {
+            if (openssl_verify(json_encode($data, JSON_UNESCAPED_UNICODE), base64_decode($sign), $res, OPENSSL_ALGO_SHA256) !== 1) {
                 throw new InvalidResponseException('Data signature verification failed.');
             }
         } else {
-            if (openssl_verify(json_encode($data, 256), base64_decode($sign), $res, OPENSSL_ALGO_SHA1) !== 1) {
+            if (openssl_verify(json_encode($data, JSON_UNESCAPED_UNICODE), base64_decode($sign), $res, OPENSSL_ALGO_SHA1) !== 1) {
                 throw new InvalidResponseException('Data signature verification failed.');
             }
         }
@@ -159,7 +159,7 @@ abstract class BasicAliPay
      * @param boolean $needSignType 是否需要sign_type字段
      * @return string
      */
-    private function getSignContent(array $data, bool $needSignType = false): string
+    protected function getSignContent(array $data, bool $needSignType = false): string
     {
         [$attrs,] = [[], ksort($data)];
 
@@ -204,6 +204,7 @@ abstract class BasicAliPay
         }
         return $data[$key];
     }
+
 
     /**
      * 应用数据操作

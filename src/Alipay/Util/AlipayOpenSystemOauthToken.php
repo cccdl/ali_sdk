@@ -9,8 +9,6 @@ use GuzzleHttp\Exception\GuzzleException;
 
 /**
  * 换取授权访问令牌
- * Class App
- * @package AliPay
  */
 class AlipayOpenSystemOauthToken extends BasicAliPay
 {

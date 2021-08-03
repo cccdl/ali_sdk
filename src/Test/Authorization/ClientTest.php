@@ -10,7 +10,7 @@ require '../../../vendor/autoload.php';
 
 class ClientTest extends TestCase
 {
-    public function testA(): void
+    public function testAuthorization(): void
     {
         $c = TestAccount::getTestAccount();
         $this->assertIsArray($c);

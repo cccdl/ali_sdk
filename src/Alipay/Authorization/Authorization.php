@@ -7,8 +7,6 @@ use cccdl\ali_sdk\Alipay\BasicAliPay;
 /**
  * 获取app授权验证码infoStr
  * 授权服务类
- * Class App
- * @package AliPay
  */
 class Authorization extends BasicAliPay
 {

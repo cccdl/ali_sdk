@@ -13,6 +13,7 @@
 - 1.2.0 增加 《获取移动app端使用的授权参数infoStr》
 - 1.2.1 优化 《实名证件信息比对验证咨询【非预咨询接口】》、《实名证件信息比对验证预咨询》 的apply请求方法
 - 1.2.2 优化 《获取app授权验证码infoStr》、《换取授权访问令牌》 的apply请求方法
+- 2.0.0 增加 《app支付接口2.0》接口，优化所有接口类名按照支付接口名定义
 
 ## 安装
 
@@ -39,6 +40,7 @@ $ composer require cccdl/ali_sdk
 | Alipay\Member\AlipayUserCertdocCertverifyConsult.php|实名证件信息比对验证咨询|
 | Alipay\Util\AlipayOpenSystemOauthToken.php|换取授权访问令牌|
 | Alipay\Authorization\Authorization.php|获取移动app端使用的授权参数infoStr|
+| Alipay\Pay\AlipayTradeAppPay.php|app支付接口2.0【其实是orderStr的生成】|
 
 ### 快速使用
 

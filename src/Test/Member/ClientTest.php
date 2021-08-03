@@ -11,7 +11,7 @@ require '../../../vendor/autoload.php';
 
 class ClientTest extends TestCase
 {
-    public function testCertdocCertverifyPreconsult(): void
+    public function testAlipayUserCertdocCertverifyPreconsult(): void
     {
         $c = TestAccount::getTestAccount();
         $this->assertIsArray($c);
@@ -36,7 +36,7 @@ class ClientTest extends TestCase
     }
 
 
-    public function testCertdocCertverifyConsult(): void
+    public function testAlipayUserCertdocCertverifyConsult(): void
     {
         $c = TestAccount::getTestAccount();
         $this->assertIsArray($c);

@@ -9,8 +9,6 @@ use GuzzleHttp\Exception\GuzzleException;
 
 /**
  * 实名证件信息比对验证预咨询
- * Class App
- * @package AliPay
  */
 class AlipayUserCertdocCertverifyPreconsult extends BasicAliPay
 {
@@ -36,7 +34,7 @@ class AlipayUserCertdocCertverifyPreconsult extends BasicAliPay
      */
     public function apply(array $options)
     {
-        $this->options->set('biz_content', json_encode($this->params->merge($options), 256));
+        $this->options->set('biz_content', json_encode($this->params->merge($options), JSON_UNESCAPED_UNICODE));
         $this->options->set('sign', $this->getSign());
         return $this->postBody();
     }
