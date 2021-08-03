@@ -50,6 +50,10 @@ abstract class BasicAliPay
      */
     protected string $gateway = 'https://openapi.alipay.com/gateway.do?charset=utf-8';
 
+    /**
+     * 操作api
+     * @var string
+     */
     protected string $method;
 
     /**
@@ -129,16 +133,22 @@ abstract class BasicAliPay
 
     /**
      * 获取数据签名
+     * 默认签名请求参数，传入str则签名str
+     * @param string $str
      * @return string
      */
-    protected function getSign(): string
+    protected function getSign(string $str = ''): string
     {
+        if (empty($str)) {
+            $str = $this->getSignContent($this->options->get(), true);
+        }
+
         $content = wordwrap($this->trimCert($this->config->get('private_key')), 64, "\n", true);
         $string = "-----BEGIN RSA PRIVATE KEY-----\n$content\n-----END RSA PRIVATE KEY-----";
         if ($this->options->get('sign_type') === 'RSA2') {
-            openssl_sign($this->getSignContent($this->options->get(), true), $sign, $string, OPENSSL_ALGO_SHA256);
+            openssl_sign($str, $sign, $string, OPENSSL_ALGO_SHA256);
         } else {
-            openssl_sign($this->getSignContent($this->options->get(), true), $sign, $string, OPENSSL_ALGO_SHA1);
+            openssl_sign($str, $sign, $string, OPENSSL_ALGO_SHA1);
         }
         return base64_encode($sign);
     }
@@ -152,10 +162,17 @@ abstract class BasicAliPay
     private function getSignContent(array $data, bool $needSignType = false): string
     {
         [$attrs,] = [[], ksort($data)];
-        if (isset($data['sign'])) unset($data['sign']);
-        if (empty($needSignType)) unset($data['sign_type']);
+
+        if (isset($data['sign'])) {
+            unset($data['sign']);
+        }
+        if (empty($needSignType)) {
+            unset($data['sign_type']);
+        }
         foreach ($data as $key => $value) {
-            if ($value === '' || is_null($value)) continue;
+            if ($value === '' || is_null($value)) {
+                continue;
+            }
             array_push($attrs, "$key=$value");
         }
         return join('&', $attrs);
@@ -168,19 +185,24 @@ abstract class BasicAliPay
      * @throws GuzzleException
      * @throws cccdlException
      */
-    protected function postBody()
+    protected function postBody($key = '')
     {
         $data = $this->post();
 
-        if (!isset($data[$this->method]['code']) || $data[$this->method]['code'] !== '10000') {
+        if (empty($key)) {
+            $key = $this->method;
+        }
+
+        var_dump($data);
+        if (!isset($data[$key]['code']) || $data[$key]['code'] !== '10000') {
             throw new InvalidResponseException(
                 "Error: " .
-                (empty($data[$this->method]['code']) ? '' : "{$data[$this->method]['msg']} [{$data[$this->method]['code']}]\r\n") .
-                (empty($data[$this->method]['sub_code']) ? '' : "{$data[$this->method]['sub_msg']} [{$data[$this->method]['sub_code']}]\r\n"),
-                $data[$this->method]['code'], $data
+                (empty($data[$key]['code']) ? '' : "{$data[$key]['msg']} [{$data[$key]['code']}]\r\n") .
+                (empty($data[$key]['sub_code']) ? '' : "{$data[$key]['sub_msg']} [{$data[$key]['sub_code']}]\r\n"),
+                $data[$key]['code'], $data
             );
         }
-        return $data[$this->method];
+        return $data[$key];
     }
 
     /**
