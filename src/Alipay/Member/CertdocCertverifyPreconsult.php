@@ -5,6 +5,7 @@ namespace cccdl\ali_sdk\Alipay\Member;
 use cccdl\ali_sdk\Alipay\BasicAliPay;
 use cccdl\ali_sdk\Exceptions\cccdlException;
 use cccdl\ali_sdk\Exceptions\InvalidResponseException;
+use GuzzleHttp\Exception\GuzzleException;
 
 /**
  * 实名证件信息比对验证预咨询
@@ -31,7 +32,7 @@ class CertdocCertverifyPreconsult extends BasicAliPay
      * @return mixed
      * @throws InvalidResponseException
      * @throws cccdlException
-     * @throws \GuzzleHttp\Exception\GuzzleException
+     * @throws GuzzleException
      */
     public function apply(array $options)
     {
