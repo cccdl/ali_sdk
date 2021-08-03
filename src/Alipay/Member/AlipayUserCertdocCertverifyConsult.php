@@ -1,6 +1,6 @@
 <?php
 
-namespace cccdl\ali_sdk\Alipay\Util;
+namespace cccdl\ali_sdk\Alipay\Member;
 
 use cccdl\ali_sdk\Alipay\BasicAliPay;
 use cccdl\ali_sdk\Exceptions\cccdlException;
@@ -8,11 +8,11 @@ use cccdl\ali_sdk\Exceptions\InvalidResponseException;
 use GuzzleHttp\Exception\GuzzleException;
 
 /**
- * 换取授权访问令牌
+ * 实名证件信息比对验证咨询【非预咨询接口】
  * Class App
  * @package AliPay
  */
-class SystemOauthToken extends BasicAliPay
+class AlipayUserCertdocCertverifyConsult extends BasicAliPay
 {
     /**
      * App constructor.
@@ -21,7 +21,7 @@ class SystemOauthToken extends BasicAliPay
     public function __construct(array $options)
     {
         parent::__construct($options);
-        $this->options->set('method', 'alipay.system.oauth.token');
+        $this->options->set('method', 'alipay.user.certdoc.certverify.consult');
         $this->method = str_replace('.', '_', $this->options['method']) . '_response';
     }
 
@@ -29,17 +29,15 @@ class SystemOauthToken extends BasicAliPay
     /**
      * @param array $options
      * @return mixed
-     * @throws GuzzleException
      * @throws InvalidResponseException
+     * @throws GuzzleException
      * @throws cccdlException
      */
     public function apply(array $options)
     {
-        $this->options->set('grant_type', $options['grant_type']);
-        $this->options->set('code', $options['code']);
+        $this->options->set('biz_content', json_encode($this->params->merge($options), 256));
+        $this->options->set('auth_token', $options['auth_token']);
         $this->options->set('sign', $this->getSign());
-        return $this->postBody('error_response');
+        return $this->postBody();
     }
-
-
 }

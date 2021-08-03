@@ -2,8 +2,8 @@
 
 namespace cccdl\ali_sdk\Test\Member;
 
-use cccdl\ali_sdk\Alipay\Member\CertdocCertverifyConsult;
-use cccdl\ali_sdk\Alipay\Member\CertdocCertverifyPreconsult;
+use cccdl\ali_sdk\Alipay\Member\AlipayUserCertdocCertverifyConsult;
+use cccdl\ali_sdk\Alipay\Member\AlipayUserCertdocCertverifyPreconsult;
 use cccdl\ali_sdk\Test\TestAccount;
 use PHPUnit\Framework\TestCase;
 
@@ -15,7 +15,7 @@ class ClientTest extends TestCase
     {
         $c = TestAccount::getTestAccount();
         $this->assertIsArray($c);
-        $app = new CertdocCertverifyPreconsult($c);
+        $app = new AlipayUserCertdocCertverifyPreconsult($c);
         $result = $app->apply([
 
             // 真实姓名
@@ -40,7 +40,7 @@ class ClientTest extends TestCase
     {
         $c = TestAccount::getTestAccount();
         $this->assertIsArray($c);
-        $app = new CertdocCertverifyConsult($c);
+        $app = new AlipayUserCertdocCertverifyConsult($c);
         $result = $app->apply([
             //验证id
             'verify_id' => '',

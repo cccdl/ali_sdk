@@ -1,14 +1,13 @@
 # 支付宝 API SDK for PHP  !
 
 ### 主要新特性
-
-* 支付宝API SDK FOR PHP
 * 简化使用方法
 * 调用简单，统一原样返回
+* 对应支付宝api文档分类定义文档夹目录，详细看“命名空间对应”
 * 可执行单元测试
+* 持续更新中...
 
 ### 更新日志
-
 - 1.0.0 增加 《换取授权访问令牌》、《换取授权访问令牌》，请求库改为 guzzlehttp/guzzle 7.3版本
 - 1.1.0 增加 《实名证件信息比对验证咨询》
 - 1.2.0 增加 《获取移动app端使用的授权参数infoStr》
@@ -23,15 +22,23 @@
 $ composer require cccdl/ali_sdk
 ```
 
+### 命名空间对应[支付宝api文档](https://opendocs.alipay.com/apis)
+
+| 命名空间|api类型|
+| ------------------|------------|
+| Alipay\Authorization|额外补充|
+| Alipay\Member|会员API|
+| Alipay\Pay|支付API|
+| Alipay\util|工具类API|
+
 ### 接口对应文件
 
-| 文件               |  说明      |
-| ------------------|------------|
-| Alipay\Member\CertdocCertverifyPreconsult.php  | 实名证件信息比对验证预咨询 |
-| Alipay\Member\CertdocCertverifyConsult.php  | 实名证件信息比对验证咨询 |
-| Alipay\Util\SystemOauthToken.php  | 换取授权访问令牌 |
-| Alipay\Authorization\Authorization.php  | 获取移动app端使用的授权参数infoStr |
-
+| 文件|说明|
+| -------------------|------------|
+| Alipay\Member\AlipayUserCertdocCertverifyPreconsult.php|实名证件信息比对验证预咨询|
+| Alipay\Member\AlipayUserCertdocCertverifyConsult.php|实名证件信息比对验证咨询|
+| Alipay\Util\AlipayOpenSystemOauthToken.php|换取授权访问令牌|
+| Alipay\Authorization\Authorization.php|获取移动app端使用的授权参数infoStr|
 
 ### 快速使用
 
@@ -73,9 +80,7 @@ $result = $app->apply([
 [提交 Issue](https://github.com/cccdl/ali_sdk/issues)，不符合指南的问题可能会立即关闭。
 
 ## Contributing
-
 You can contribute in one of three ways:
-
 1. File bug reports using the [issue tracker](https://github.com/cccdl/ali_sdk/issues).
 2. Answer questions or fix bugs on the [issue tracker](https://github.com/cccdl/ali_sdk/issues).
 3. Contribute new features or update the wiki.
@@ -84,5 +89,4 @@ _The code contribution process is not very formal. You just need to make sure th
 PSR-2 coding guidelines. Any new code contributions must be accompanied by unit tests where applicable._
 
 ## License
-
 MIT

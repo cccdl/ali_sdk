@@ -2,19 +2,27 @@
 
 namespace cccdl\ali_sdk\Test\Util;
 
-use cccdl\ali_sdk\Alipay\Util\SystemOauthToken;
+use cccdl\ali_sdk\Alipay\Util\AlipayOpenSystemOauthToken;
+use cccdl\ali_sdk\Exceptions\cccdlException;
+use cccdl\ali_sdk\Exceptions\InvalidResponseException;
 use cccdl\ali_sdk\Test\TestAccount;
+use GuzzleHttp\Exception\GuzzleException;
 use PHPUnit\Framework\TestCase;
 
 require '../../../vendor/autoload.php';
 
 class ClientTest extends TestCase
 {
+    /**
+     * @throws GuzzleException
+     * @throws cccdlException
+     * @throws InvalidResponseException
+     */
     public function testSystemOauthToken(): void
     {
         $c = TestAccount::getTestAccount();
         $this->assertIsArray($c);
-        $app = new SystemOauthToken($c);
+        $app = new AlipayOpenSystemOauthToken($c);
         $result = $app->apply([
             // 授权方式。支持：1.authorization_code，表示换取使用用户授权码code换取授权令牌access_token。 2.refresh_token，表示使用refresh_token刷新获取新授权令牌。
             'grant_type' => 'authorization_code',
