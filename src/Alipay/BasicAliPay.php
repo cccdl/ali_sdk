@@ -24,37 +24,37 @@ abstract class BasicAliPay
      * 支持配置
      * @var DataArray
      */
-    protected DataArray $config;
+    protected $config;
 
     /**
      * 当前请求数据
      * @var DataArray
      */
-    protected DataArray $options;
+    protected $options;
 
     /**
      * DzContent数据
      * @var DataArray
      */
-    protected DataArray $params;
+    protected $params;
 
     /**
      * 静态缓存
      * @var static
      */
-    protected static BasicAliPay $cache;
+    protected static $cache;
 
     /**
      * 正常请求网关
      * @var string
      */
-    protected string $gateway = 'https://openapi.alipay.com/gateway.do?charset=utf-8';
+    protected $gateway = 'https://openapi.alipay.com/gateway.do?charset=utf-8';
 
     /**
      * 操作api
      * @var string
      */
-    protected string $method;
+    protected $method;
 
     /**
      * AliPay constructor.
@@ -96,37 +96,21 @@ abstract class BasicAliPay
     }
 
     /**
-     * 静态创建对象
-     * @param array $config
-     * @return static
-     */
-    public static function instance(array $config): BasicAliPay
-    {
-        $key = md5(get_called_class() . serialize($config));
-        if (isset(self::$cache[$key])) return self::$cache[$key];
-        return self::$cache[$key] = new static($config);
-    }
-
-
-    /**
-     * 验证接口返回的数据签名
-     * @param array $data 通知数据
-     * @param string|null $sign 数据签名
-     * @return array
+     * 获取通知数据
+     * @param boolean $needSignType 是否需要sign_type字段
      * @throws InvalidResponseException
      */
-    protected function verify(array $data, ?string $sign): array
+    public function notify(bool $needSignType = false): array
     {
+        $data = $_POST;
+        if (empty($data) || empty($data['sign'])) {
+            throw new InvalidResponseException('Illegal push request.', 0, $data);
+        }
+        $string = $this->getSignContent($data, $needSignType);
         $content = wordwrap($this->config->get('public_key'), 64, "\n", true);
-        $res = "-----BEGIN PUBLIC KEY-----\n$content\n-----END PUBLIC KEY-----";
-        if ($this->options->get('sign_type') === 'RSA2') {
-            if (openssl_verify(json_encode($data, JSON_UNESCAPED_UNICODE), base64_decode($sign), $res, OPENSSL_ALGO_SHA256) !== 1) {
-                throw new InvalidResponseException('Data signature verification failed.');
-            }
-        } else {
-            if (openssl_verify(json_encode($data, JSON_UNESCAPED_UNICODE), base64_decode($sign), $res, OPENSSL_ALGO_SHA1) !== 1) {
-                throw new InvalidResponseException('Data signature verification failed.');
-            }
+        $res = "-----BEGIN PUBLIC KEY-----\n{$content}\n-----END PUBLIC KEY-----";
+        if (openssl_verify($string, base64_decode($data['sign']), $res, OPENSSL_ALGO_SHA256) !== 1) {
+            throw new InvalidResponseException('Data signature verification failed.', 0, $data);
         }
         return $data;
     }
