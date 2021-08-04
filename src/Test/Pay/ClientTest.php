@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace cccdl\ali_sdk\Test\Util;
+namespace cccdl\ali_sdk\Test\Pay;
 
 use cccdl\ali_sdk\Alipay\Pay\AlipayTradeAppPay;
 use cccdl\ali_sdk\Test\TestAccount;
