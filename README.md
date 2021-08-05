@@ -67,7 +67,7 @@ $config = [
      //获取地址 https://openhome.alipay.com/platform/keyManage.htm?keyType=partner 合作伙伴身份pid
     'pid' => '请填写合作伙伴身份pid',
 ];
-$app = new SystemOauthToken($config);
+$app = new AlipayOpenSystemOauthToken($config);
 $result = $app->apply([
     // 授权方式。支持：1.authorization_code，表示换取使用用户授权码code换取授权令牌access_token。 2.refresh_token，表示使用refresh_token刷新获取新授权令牌。
     'grant_type' => 'authorization_code',
