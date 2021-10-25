@@ -36,8 +36,10 @@ class AlipayOpenSystemOauthToken extends BasicAliPay
         $this->options->set('grant_type', $options['grant_type']);
         $this->options->set('code', $options['code']);
         $this->options->set('sign', $this->getSign());
-        return $this->postBody('error_response');
+        return $this->postBody();
     }
+
+
 
 
 }

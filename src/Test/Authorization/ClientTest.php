@@ -19,7 +19,7 @@ class ClientTest extends TestCase
             'scope' => 'id_verify' //id_verify=支付宝实名信息验证功能场景 kuaijie=支付宝登录场景
         ]);
 
-        var_dump($result);
+        echo($result);
         $this->assertIsString($result);
 
     }

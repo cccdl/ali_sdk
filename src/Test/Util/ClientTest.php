@@ -27,7 +27,7 @@ class ClientTest extends TestCase
             // 授权方式。支持：1.authorization_code，表示换取使用用户授权码code换取授权令牌access_token。 2.refresh_token，表示使用refresh_token刷新获取新授权令牌。
             'grant_type' => 'authorization_code',
             // 授权码，用户对应用授权后得到。本参数在 grant_type 为 authorization_code 时必填；为 refresh_token 时不填。
-            'code' => 'd99c202182d645649e14af2b920fPD38',
+            'code' => '90553ba41fff74cfc33df9708dcde74d',
         ]);
 
         print_r($result);
