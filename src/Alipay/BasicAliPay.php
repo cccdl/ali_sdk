@@ -177,7 +177,6 @@ abstract class BasicAliPay
             $key = $this->method;
         }
 
-        var_dump($data);
         if (!isset($data[$key]['code']) || $data[$key]['code'] !== '10000') {
             throw new InvalidResponseException(
                 "Error: " .
