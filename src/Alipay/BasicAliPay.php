@@ -188,6 +188,71 @@ abstract class BasicAliPay
         return $data[$key];
     }
 
+    /**
+     * 新版 从证书中提取序列号
+     * @param string $sign
+     * @return string
+     */
+    public function getCertSN(string $sign): string
+    {
+        $ssl = openssl_x509_parse($sign);
+        return md5($this->arrToStr(array_reverse($ssl['issuer'])) . $ssl['serialNumber']);
+    }
+
+    /**
+     * 新版 数组转字符串
+     * @param array $array
+     * @return string
+     */
+    private function arrToStr(array $array): string
+    {
+        $string = [];
+        if ($array) {
+            foreach ($array as $key => $value) {
+                $string[] = $key . '=' . $value;
+            }
+        }
+        return implode(',', $string);
+    }
+
+    /**
+     * 新版 提取根证书序列号
+     * @param string $sign
+     * @return string|null
+     */
+    public function getRootCertSN(string $sign): ?string
+    {
+        $sn = null;
+        $array = explode("-----END CERTIFICATE-----", $sign);
+        for ($i = 0; $i < count($array) - 1; $i++) {
+            $ssl[$i] = openssl_x509_parse($array[$i] . "-----END CERTIFICATE-----");
+            if (strpos($ssl[$i]['serialNumber'], '0x') === 0) {
+                $ssl[$i]['serialNumber'] = $this->hexToDec($ssl[$i]['serialNumberHex']);
+            }
+            if ($ssl[$i]['signatureTypeLN'] == "sha1WithRSAEncryption" || $ssl[$i]['signatureTypeLN'] == "sha256WithRSAEncryption") {
+                if ($sn == null) {
+                    $sn = md5($this->arrToStr(array_reverse($ssl[$i]['issuer'])) . $ssl[$i]['serialNumber']);
+                } else {
+                    $sn = $sn . "_" . md5($this->arrToStr(array_reverse($ssl[$i]['issuer'])) . $ssl[$i]['serialNumber']);
+                }
+            }
+        }
+        return $sn;
+    }
+
+    /**
+     * 新版 0x转高精度数字
+     * @param string $hex
+     * @return int|string
+     */
+    private function hexToDec($hex)
+    {
+        list($dec, $len) = [0, strlen($hex)];
+        for ($i = 1; $i <= $len; $i++) {
+            $dec = bcadd($dec, bcmul(strval(hexdec($hex[$i - 1])), bcpow('16', strval($len - $i))));
+        }
+        return $dec;
+    }
 
     /**
      * 应用数据操作

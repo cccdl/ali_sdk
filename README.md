@@ -19,6 +19,7 @@
 - 2.0.2 增加 获取异步通知参数方法+验签
 - 2.0.3 修复 基类调试打印输出导致调用失败
 - 2.0.4 修复 alipay.system.oauth.token 接口调用
+- 2.1.0 增加 alipay.fund.trans.uni.transfer 单笔转账到支付宝账户接口
 
 ## 安装
 
@@ -36,6 +37,7 @@ $ composer require cccdl/ali_sdk
 | Alipay\Member|会员API|
 | Alipay\Pay|支付API|
 | Alipay\util|工具类API|
+| Alipay\Fund|资金类API|
 
 ### 接口对应文件
 
@@ -46,6 +48,7 @@ $ composer require cccdl/ali_sdk
 | Alipay\Util\AlipayOpenSystemOauthToken.php|换取授权访问令牌|
 | Alipay\Authorization\Authorization.php|获取移动app端使用的授权参数infoStr|
 | Alipay\Pay\AlipayTradeAppPay.php|app支付接口2.0【其实是orderStr的生成】|
+| Alipay\Fund\AlipayFundTransUniTransfer.php|单笔转账到支付宝账户|
 
 ### 快速使用
 

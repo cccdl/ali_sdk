@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace cccdl\ali_sdk\Test\Member;
+namespace cccdl\ali_sdk\Test\Authorization;
 
 use cccdl\ali_sdk\Alipay\Authorization\Authorization;
 use cccdl\ali_sdk\Test\TestAccount;
